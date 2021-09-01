@@ -5,7 +5,6 @@ import scipy
 import scipy.signal
 import scipy.optimize
 import scipy.special
-from scipy.misc import factorial
 
 __all__ = ['Morlet', 'Paul', 'DOG', 'Ricker', 'Marr', 'Mexican_hat']
 
@@ -172,8 +171,8 @@ class Paul(object):
         m = self.m
         x = t / s
 
-        const = (2 ** m * 1j ** m * factorial(m)) \
-            / (np.pi * factorial(2 * m)) ** .5
+        const = (2 ** m * 1j ** m * scipy.special.factorial(m)) \
+            / (np.pi * scipy.special.factorial(2 * m)) ** .5
         functional_form = (1 - 1j * x) ** -(m + 1)
 
         output = const * functional_form
@@ -213,7 +212,7 @@ class Paul(object):
         Hw = 0.5 * (np.sign(x) + 1)
 
         # prefactor
-        const = 2 ** m / (m * factorial(2 * m - 1)) ** .5
+        const = 2 ** m / (m * scipy.special.factorial(2 * m - 1)) ** .5
 
         functional_form = Hw * (x) ** m * np.exp(-x)
 
